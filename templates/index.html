@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detecting AI Generated Faces</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative; /* Ensure positioning context for pseudo-element */
+            background: transparent; /* Remove direct background to use pseudo-element */
+        }
+
+        /* Blurred background using ::before pseudo-element */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://assets.grok.com/users/0039978d-25f0-4142-8f7a-ef6a529eb052/generated/RbcuiqERNHNjokPA/image.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(6px); /* 40% blur effect (adjusted from 10px to 6px) */
+            z-index: -1; /* Behind content */
+            animation: backgroundFadeIn 2s ease-out forwards;
+        }
+
+        /* Classic fade-in animation for background */
+        @keyframes backgroundFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        h1 {
+            color: #000000; /* Black heading */
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            animation: bounce 1.5s infinite;
+        }
+
+        /* Classic bounce animation for heading */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            animation: slideUp 1.5s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
+
+        /* Classic slide-up animation for form */
+        @keyframes slideUp {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 15px auto;
+            padding: 10px;
+            font-size: 1em;
+            color: #2c3e50;
+            border: 2px solid #8e44ad; /* Purple border */
+            border-radius: 8px;
+            background-color: #f1f8ff;
+            cursor: pointer;
+            transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="file"]:hover {
+            border-color: #e74c3c; /* Red on hover */
+            background-color: #e8f0fe;
+            transform: scale(1.02);
+        }
+
+        input[type="submit"] {
+            background-color: #27ae60; /* Green button */
+            color: #ffffff;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #219653; /* Darker green on hover */
+            transform: scale(1.05);
+        }
+
+        input[type="submit"]:active {
+            transform: scale(1);
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            form {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            input[type="submit"] {
+                padding: 8px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Detecting AI Generated Faces</h1>
+    <form method="post" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*">
+        <input type="submit" value="Upload">
+    </form>
+</body>
+</html>
